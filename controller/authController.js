@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const secrets = require("../secrets.js");
+const secrets = require("../secrets");
 const FooduserModel = require("../model/userModel");
 // ************************controller functions************************
 async function signupController(req, res) {

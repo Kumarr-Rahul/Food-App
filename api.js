@@ -5,7 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 // jsonwebtoken
 const jwt = require("jsonwebtoken");
-const secrets = require("./secrets.js");
+const secrets = require("./secrets");
 // token name is -> JWT & mechanism -> cookies
 // repersent -> collection
 const userRouter = require("./routes/userRoutes");

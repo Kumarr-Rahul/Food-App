@@ -5,11 +5,10 @@
 // connect to my app // mongoose 
 const mongoose = require('mongoose'); //npm i mongoose
 // db server link -> mongodb atlas ka link
-let dblink =
-    "mongodb+srv://admin:bjzgt9I3WeGWigbR@cluster0.uarkk.mongodb.net/?retryWrites=true&w=majority";
+let secrets = require("../secrets")
 // db  server connect -> mongodbAtlas connect 
 mongoose
-    .connect(dblink)
+    .connect(secrets.DB_LINK)
     .then(function () {
         console.log("connected");
     })
