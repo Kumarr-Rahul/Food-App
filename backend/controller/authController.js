@@ -19,8 +19,7 @@ async function loginController(req, res) {
         let data = req.body;
         let { email, password } = data;
         if (email && password) {
-            let user = await FooduserModel
-                .findOne({ email: email });
+            let user = await FooduserModel.findOne({ email: email });
             if (user) {
                 if (user.password == password) {
                     // create JWT ->-> payload, secret text 
@@ -32,22 +31,38 @@ async function loginController(req, res) {
                     // put token into cookies
                     res.cookie("JWT", token);
                     // send the token 
-                    res.send("user logged In");
+                    delete user.password
+                    delete user.confirmPassword
+                    // before sending to frontend 
+                    res.status(200).json({
+                        user
+                    });
                 } else {
-                    res.send("email or password does not match");
+                    // email or password missmatch
+                    res.status(400).json({
+                        result: "email or password does not match"
+                    })
                 }
             } else {
-                res.send(`User with this email Id is not found.
-                 kindly signup`);
+                // user not found
+                res.status(404).json({
+                    result: "user not found"
+                })
             }
         } else {
-            res.end(" kindly enter email and password both");
+            // something is missing
+            res.status(400).json({
+                result: "user not found kindly signup"
+            });
         }
     } catch (err) {
-        res.end(err.message);
+        // server crashed
+        res.status(500).json({
+            result: err.message
+        }
+        );
     }
 }
-
 async function resetPasswordController(req, res) {
     try {
         let { otp, password, confirmPassword, email } =
