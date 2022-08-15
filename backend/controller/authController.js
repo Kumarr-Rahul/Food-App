@@ -85,7 +85,7 @@ async function resetPasswordController(req, res) {
             })
         } else {
             if (user.otp != otp) {
-                res.staus(400).json({
+                res.status(400).json({
                     result: "wrong otp"
                 })
             } else {
