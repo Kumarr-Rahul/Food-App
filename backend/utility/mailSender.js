@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const secrets = require("./secrets");
+const secrets = require("../secrets");
 async function mailSender() {
     // input through which mechanism send your email -> port, facilitator (technical details) 
     let transporter = nodemailer.createTransport({
