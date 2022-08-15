@@ -18,7 +18,7 @@ function ForgetPassword() {
             } else {
                 alert("Mail send to your registerd email ID");
                 setResetEmail(email);
-                // send to your restpasswordPage
+                // // send to your restpasswordPage
                 history.push("/otp");
             }
         } catch (err) {
