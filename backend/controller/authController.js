@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const secrets = require("../secrets");
 const FooduserModel = require("../model/userModel");
+const mailSender = require("../utilities/mailSender")
 // ************************controller functions************************
 async function signupController(req, res) {
     try {
@@ -116,6 +117,7 @@ async function forgetPasswordController(req, res) {
         let { email } = req.body;
         let afterFiveMin = Date.now() + 5 * 60 * 1000;
         let otp = otpGenerator();
+        await mailSender(email,otp);
         //    mail
         // by default -> FindAndUpdate -> not updated send document, 
         // new =true -> you will get updated doc
@@ -129,7 +131,7 @@ async function forgetPasswordController(req, res) {
             "message": "Otp send to your mail"
         })
     } catch (err) {
-        res.send(err.message);
+        res.status(500).send(err.message);
     }
 }
 function protectRoute(req, res, next) {
