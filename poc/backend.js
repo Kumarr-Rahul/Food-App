@@ -33,7 +33,7 @@ app.get("/checkout", function (req, res) {
     });
 })
 app.post("/verification", (req, res) => {
-    const secret = "mysecret";
+    const secret = "mysecret"; 
 
     console.log(req.body);
 
